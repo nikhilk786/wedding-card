@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg-ivory: #FAF7F2;
+  --bg-champagne: #F4EDE2;
+  --maroon-royal: #6B1322;
+  --maroon-deep: #4A0813;
+  --gold-antique: #C5A059;
+  --gold-foil: #DDBB70;
+  --emerald-subtle: #114B3E;
+  --text-primary: #2B181B;
+  --text-secondary: #5C4A4C;
+}
+
+html {
+  color-scheme: light;
+  background-color: var(--bg-ivory);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-ivory);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 10% 50%, rgba(107, 19, 34, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 70%, rgba(17, 75, 62, 0.03) 0%, transparent 40%);
+  color: var(--text-primary);
+  font-family: var(--font-montserrat), sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Gold foil foil-shine effect */
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    #C5A059 0%,
+    #F2E3B8 25%,
+    #C5A059 50%,
+    #F2E3B8 75%,
+    #C5A059 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* Traditional Ornamental Borders */
+.royal-card-border {
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  box-shadow: 
+    0 10px 30px -10px rgba(107, 19, 34, 0.08),
+    0 0 0 1px rgba(197, 160, 89, 0.15) inset,
+    0 0 20px 0 rgba(197, 160, 89, 0.06);
+}
+
+.ornamental-frame {
+  position: relative;
+}
+
+.ornamental-frame::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DFCCB3;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A059;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,35 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Next.js Build Outputs & Cache
+/.next/
+/out/
+/build
+/dist
+
+# Temporary and Cache files
+/.audioflow_storage
+/.audioflow_cache
+*.tmp
+*.log
+.DS_Store
+*.pem
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Vercel
+.vercel
+
