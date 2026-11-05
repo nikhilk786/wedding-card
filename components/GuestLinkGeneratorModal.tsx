@@ -82,9 +82,6 @@ export function GuestLinkGeneratorModal({ isOpen, onClose }: GuestLinkGeneratorM
       text = `⚜️ *Shree Ganeshay Namah* ⚜️\n\n` +
         `Dear *${greetingGuest}*,\n\n` +
         `Kumawat Family cordially invites you and your family to celebrate the wedding ceremony of *Himani & Manoj*.\n\n` +
-        `📅 *Wedding Date:* Sunday, 1st March 2026\n` +
-        `⏰ *Auspicious Muhurat:* 07:15 PM Onwards\n` +
-        `📍 *Venue:* Radha Krishna Marriage Garden, Mansarovar, Jaipur\n\n` +
         `✨ *Open your personalized royal digital invitation:*\n` +
         `${generatedUrl}\n\n` +
         `We look forward to your gracious presence and blessings.\n` +
