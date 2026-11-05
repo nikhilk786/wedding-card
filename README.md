@@ -1,121 +1,94 @@
-# Royal Indian Wedding Invitation — Next.js
+# 👑 Royal Indian Wedding Invitation — The Treasure Vault Experience
 
-A luxurious, mobile-first digital Indian wedding invitation inspired by royal Rajasthani palaces, traditional miniature art, elegant floral ornamentation, and premium wedding stationery.
+An ultra-luxurious, cinematic, interactive royal Indian wedding invitation website built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, and **Web Audio API**.
 
-Built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, and **Tabler Icons**. Ready for one-click deployment on **Vercel**.
-
----
-
-## 🌟 Visual Theme & Design Language
-
-- **Color Palette**:
-  - **Warm Ivory & Champagne**: `#FAF7F2` and `#F4EDE2` background
-  - **Royal Deep Maroon**: `#6B1322` and `#80162A`
-  - **Antique Gold & Foil Accents**: `#C5A059`, `#DFBA6B`, and `#9E7D3B`
-  - **Subtle Royal Emerald**: `#114B3E`
-- **Typography**:
-  - `Cinzel` & `Marcellus` for royal serif titles, bride & groom monograms, and headings
-  - `Montserrat` for clean, highly readable body typography across all mobile devices
-- **Ornaments**: Handcrafted SVG Ganesha emblem, traditional mandap arches, royal cusped arches, lotus motifs, and delicate corner brackets.
-- **Motion**: Subtle floating golden rose and marigold petals, elegant envelope-unfolding transition, respecting `prefers-reduced-motion`.
+Created for **Manoj Kumawat & Himani Kumawat** (Wedding Date: **Sunday, 1st March 2026**).
 
 ---
 
-## 💍 Features & Invitation Sections
+## 🌟 The Cinematic Journey (Scene-by-Scene)
 
-1. **Opening Experience (Royal Envelope & Wax Seal)**:
-   - Fullscreen royal card cover with traditional invocation `|| श्री गणेशाय नमः ||`.
-   - "Open Royal Invitation" button with celebratory gold confetti.
-   - Immediate "Skip to details" option so guests are never forced to wait.
-2. **Hero Section**:
-   - Prominent bride and groom names with an ornate decorative ampersand.
-   - Auspicious date, traditional Hindu calendar tithi, and Shubh Vivah Muhurat.
-   - Palace venue and city.
-   - "Save The Date" interaction supporting Google Calendar and Apple/Outlook `.ics` calendar file downloads.
-3. **Live Countdown Timer**:
-   - Real-time countdown (Days, Hours, Minutes, Seconds) leading up to the auspicious Muhurat.
-   - Graceful fallback for post-wedding visits ("Happily Ever After").
-4. **Bride & Groom Introduction**:
-   - Dedicated royal portrait cards for the bride and groom.
-   - Parental lineage ("Daughter of...", "Son of...") and personal biographies.
-5. **Wedding Itinerary & Events Timeline**:
-   - Haldi, Mehendi, Sangeet, Shubh Vivah, and Grand Reception.
-   - Each event includes date, time, venue, suggested attire/dress code guide, and traditional description.
-   - Only configured events are rendered.
-6. **Venue & Directions**:
-   - Venue name and full address.
-   - "Get Directions" link directly opening Google Maps.
-   - One-tap "Copy Full Address" button with live confirmation feedback.
-   - Transfer/boat shuttle guidance.
-7. **Family Blessings & Welcoming Hosts**:
-   - Traditional elder blessing statement.
-   - Welcoming family names (Bride's family & Groom's family).
-8. **RSVP & Social Sharing**:
-   - One-click "RSVP via WhatsApp" opening a pre-filled message.
-   - Native Web Share API integration (for sharing on WhatsApp, Messages, or social platforms) with clipboard link copy fallback.
-   - Direct family contact numbers for guest queries.
+### 🚪 Scene 1 — Grand Royal Palace Entrance
+- **Dual 3D Carved Teakwood Doors**: Fullscreen antique Rajasthani palace double doors (`royal-doors-left.jpg` & `royal-doors-right.jpg`) with heavy brass lion-head knockers, embossed gold leaf carvings, and round brass studs (*killas*).
+- **Vedic Invocation**: `|| श्री गणेशाय नमः ||` and traditional Ganesha crest.
+- **Atmosphere**: Warm flickering oil diyas, hanging bells, and floating golden dust particles.
+- **Interactive Door Swing**: Clicking **"ENTER THE ROYAL WORLD"** plays a resonant brass temple bell gong & wooden door creak sound, swinging both doors open in 3D perspective (`rotateY(-110deg)` / `rotateY(110deg)`) as the camera flies forward into the palace.
+- **Quick Bypass**: "Skip intro to view invitation" button for instant guest access.
+
+### 🏛️ Scene 2 — Royal Palace Corridor Reveal
+- **Grand Courtyard**: Breathtaking view of a royal palace courtyard (`palace-courtyard.jpg`) at dusk with hundreds of glowing brass oil lamps, floating marigolds, and scalloped marble arches.
+- **Regal Welcome**: Welcoming guests to the royal wedding festivities of **Himani & Manoj Kumawat**.
+- **Interactive Call-to-Action**: "APPROACH THE ROYAL TREASURE VAULT" smooth-scrolls guests directly to the treasure chest.
+
+### 🪙 Scene 3 — The Mysterious Royal Treasure Chest (Tijori / Sandook)
+- **Authentic Royal Heirloom**: Detailed antique teakwood and brass sandook (`antique-treasure-chest.jpg`) resting on a carved marble pedestal surrounded by warm diyas.
+- **Interactive Brass Lock**: Rotating central brass dial with keyhole.
+- **Unlocking Sequence**:
+  1. Guest clicks **"UNLOCK ROYAL TREASURE"**.
+  2. The brass lock smoothly rotates 90° with a metallic click sound.
+  3. Golden light rays leak from the seam of the chest.
+  4. The chest lid hinges open with 3D perspective.
+  5. A powerful, divine golden volumetric light beam radiates upward!
+  6. Golden celestial sparkle chimes play while golden dust & confetti burst into the air.
+
+### 📜 Scene 4 — The Royal Wedding Invitation Scroll
+- **Rising Scroll**: The sacred wedding invitation scroll gracefully rises upwards from inside the chest vault.
+- **Antique Parchment**: Seamless aged ivory parchment texture (`antique-parchment.jpg`) with gold foil deckled borders, brass wooden rollers/finials.
+- **Details**:
+  - `|| वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥`
+  - **Himani & Manoj Kumawat**
+  - **Sunday, 1st March 2026**
+  - **Shubh Vivah Muhurat: 07:15 PM onwards**
+  - Royal Celebration Resort, Rajasthan
+  - One-tap **"Save The Date"** (Google Calendar & Apple/Outlook `.ics` download).
+
+### 📅 Scene 5 — Wedding Ceremonies, Itinerary & Details
+- **Live Countdown Timer**: Real-time days, hours, minutes, and seconds counting down to 1st March 2026.
+- **Bride & Groom Lineage**: Royal portrait cards for Manoj & Himani.
+- **Auspicious Ceremonies**:
+  - 🟡 **Mangal Haldi & Ubtan** — 28th Feb 2026, 10:30 AM
+  - 🎁 **Chak Bhat & Mayra Dastoor** — 28th Feb 2026, 03:30 PM (Nanihal welcome & maternal blessings)
+  - 🔴 **Shubh Vivah (Baraat & Sacred Pheras)** — 1st March 2026, 05:00 PM / 07:15 PM
+  - 👑 **The Grand Reception** — 2nd March 2026, 07:00 PM
+- **Venue & Directions**: Google Maps link and one-tap "Copy Full Address".
+- **Family Blessings**: Traditional elders' blessings from The Kumawat Family.
+- **RSVP & Social Sharing**: Pre-filled WhatsApp RSVP button, Web Share API, and family contacts.
 
 ---
 
-## 🎨 How to Personalize (Single Configuration File)
+## 🎵 Procedural Royal Sound Engine (Web Audio API)
+No external broken audio links or bandwidth issues. Built-in sound synthesis in `lib/sound.ts`:
+- **Temple Bell / Brass Gong**: Rich harmonic resonance.
+- **Palace Door Creak**: Deep sub-bass wooden rumble.
+- **Brass Lock Click**: Authentic metallic tumbler rotation.
+- **Golden Chimes**: Ascending celestial pentatonic notes (Raga Bhupali).
+- **Royal Drone Ambience**: Warm meditative Tanpura/Shehnai harmonic drone.
+- **Audio Control**: Floating pill button on the bottom right to toggle sound at any time.
 
-All visible wedding details on this website are driven by a single central configuration file:
+---
+
+## 🎨 How to Personalize Wedding Details
+
+All details are in one single configuration file:
 
 📁 **`src/config/wedding.ts`**
 
-Simply open this file and customize:
-- Bride and groom names, parents' names, and bios
-- Wedding date, time, and muhurat
+Simply update:
+- Names, family details, and bios
+- Dates, timings, and muhurat
 - Venue name, address, and Google Maps URL
-- Events timeline (Haldi, Mehendi, Sangeet, Vivah, Reception)
-- Suggested dress codes
-- WhatsApp RSVP phone number and prefilled text
-- Family welcoming names
-
-```typescript
-export const WEDDING_CONFIG: WeddingConfig = {
-  bride: {
-    firstName: "Aadhya",
-    fullName: "Aadhya Sharma",
-    parents: "Daughter of Smt. Sunita & Shri Rajesh Sharma",
-    // ...
-  },
-  groom: {
-    firstName: "Devendra",
-    fullName: "Devendra Singh Rathore",
-    parents: "Son of Smt. Meenakshi & Shri Vikramaditya Singh Rathore",
-    // ...
-  },
-  // ...
-};
-```
+- WhatsApp phone numbers for RSVP
 
 ---
 
-## 🚀 Development & Build
+## 🚀 Running the Project
 
-### 1. Install Dependencies
 ```bash
-npm install
-```
-
-### 2. Run Local Development Server
-```bash
+# Start development server
 npm run dev
-```
-Open [http://localhost:3000](http://localhost:3000) to view the invitation in your browser.
 
-### 3. Production Build
-```bash
+# Build for production
 npm run build
 npm start
 ```
-
----
-
-## 🌐 Deploy to Vercel
-
-1. Push this repository to GitHub or GitLab.
-2. Go to [Vercel](https://vercel.com) and import the repository.
-3. Vercel automatically detects Next.js. Click **Deploy**.
-4. Share the generated live URL with your family and wedding guests!
+View the invitation at: `http://localhost:3001` (or `http://localhost:3000`).

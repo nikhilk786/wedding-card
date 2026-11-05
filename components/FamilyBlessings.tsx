@@ -2,16 +2,16 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { WEDDING_CONFIG } from "@/config/wedding";
+import { useLanguage } from "./LanguageContext";
 import { OrnateDivider, CornerOrnament, GaneshaMotif } from "./RoyalMotifs";
-import { IconHeartHandshake } from "@tabler/icons-react";
 
 export function FamilyBlessings() {
-  const { invitation } = WEDDING_CONFIG;
+  const { config, lang } = useLanguage();
+  const { invitation } = config;
 
   return (
-    <section className="py-16 sm:py-24 relative">
-      <div className="container mx-auto max-w-4xl px-4 sm:px-6">
+    <section className="py-12 sm:py-20 relative">
+      <div className="container mx-auto max-w-4xl px-3 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,56 +33,56 @@ export function FamilyBlessings() {
           </div>
 
           <div className="flex flex-col items-center">
-            <GaneshaMotif className="h-12 w-12 text-gold-600 mb-2" />
+            <GaneshaMotif className="h-10 w-10 sm:h-12 sm:w-12 text-gold-600 mb-2" />
             <span className="text-xs font-sans tracking-[0.25em] uppercase text-maroon-700 font-semibold">
-              With The Blessings Of Our Elders
+              {config.ui.eldersBlessingTag}
             </span>
           </div>
 
-          <OrnateDivider className="my-5" />
+          <OrnateDivider className="my-4 sm:my-5" />
 
           {/* Invitation Message */}
-          <div className="max-w-2xl mx-auto space-y-4">
-            <p className="font-serif text-base sm:text-lg text-neutral-800 leading-relaxed italic">
+          <div className="max-w-2xl mx-auto space-y-3 sm:space-y-4">
+            <p className="font-serif text-sm sm:text-lg text-neutral-800 leading-relaxed italic">
               &ldquo;{invitation.mainMessage}&rdquo;
             </p>
 
-            <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-sans">
               {invitation.secondaryMessage}
             </p>
 
             {invitation.eldersBlessing && (
-              <p className="font-serif text-xs sm:text-sm text-gold-700 font-medium pt-2">
+              <p className="font-serif text-xs sm:text-sm text-gold-800 font-semibold pt-1">
                 — {invitation.eldersBlessing} —
               </p>
             )}
           </div>
 
-          <OrnateDivider className="my-6" />
+          <OrnateDivider className="my-5 sm:my-6" />
 
           {/* Welcoming Host Families */}
           <div className="pt-2">
-            <span className="text-[11px] font-sans font-semibold tracking-widest uppercase text-gold-700 block mb-3">
-              Warmly Welcomed By
+            <span className="text-[10px] sm:text-[11px] font-sans font-semibold tracking-widest uppercase text-gold-700 block mb-3">
+              {config.ui.welcomedByTag}
             </span>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12">
-              <div className="p-3 rounded-2xl bg-white/50 border border-gold-500/20 w-full sm:w-56">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-12">
+              <div className="p-3 rounded-2xl bg-white/60 border border-gold-500/20 w-full sm:w-60">
                 <span className="text-[10px] font-sans uppercase tracking-wider text-neutral-500 block">
-                  Bride&apos;s Family
+                  {config.ui.brideFamilyLabel}
                 </span>
                 <span className="font-royal text-base sm:text-lg font-bold text-maroon-900 mt-0.5 block">
                   {invitation.hosts.brideSide}
                 </span>
               </div>
 
-              <span className="font-serif italic text-gold-600 text-lg sm:text-xl font-normal">
-                &
+              <span className="font-serif italic text-gold-600 text-base sm:text-xl font-normal">
+                {lang === "hi" ? "एवं" : "&"}
               </span>
 
-              <div className="p-3 rounded-2xl bg-white/50 border border-gold-500/20 w-full sm:w-56">
+              <div className="p-3 rounded-2xl bg-white/60 border border-gold-500/20 w-full sm:w-60">
                 <span className="text-[10px] font-sans uppercase tracking-wider text-neutral-500 block">
-                  Groom&apos;s Family
+                  {config.ui.groomFamilyLabel}
                 </span>
                 <span className="font-royal text-base sm:text-lg font-bold text-maroon-900 mt-0.5 block">
                   {invitation.hosts.groomSide}
@@ -95,4 +95,3 @@ export function FamilyBlessings() {
     </section>
   );
 }
-

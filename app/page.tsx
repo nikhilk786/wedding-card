@@ -1,6 +1,6 @@
 import React from "react";
-import { WeddingInvitationApp } from "@/components/WeddingInvitationApp";
+import { CinematicWeddingExperience } from "@/components/CinematicWeddingExperience";
 
 export default function WeddingPage() {
-  return <WeddingInvitationApp />;
+  return <CinematicWeddingExperience />;
 }
