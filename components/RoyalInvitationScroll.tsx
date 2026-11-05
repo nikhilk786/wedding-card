@@ -21,7 +21,7 @@ interface RoyalInvitationScrollProps {
 
 export function RoyalInvitationScroll({ onScrollToDetails }: RoyalInvitationScrollProps) {
   const [showCalendarMenu, setShowCalendarMenu] = useState(false);
-  const { config, lang } = useLanguage();
+  const { config, lang, guestName } = useLanguage();
 
   return (
     <motion.div
@@ -75,14 +75,22 @@ export function RoyalInvitationScroll({ onScrollToDetails }: RoyalInvitationScro
         <OrnateDivider className="my-4 sm:my-5" />
 
         {/* Invitation Text */}
-        <div className="space-y-3">
-          <span className="inline-block text-[10px] sm:text-xs font-sans font-bold tracking-[0.25em] uppercase text-maroon-800">
-            {config.ui.scrollTogether}
-          </span>
+        <div className="space-y-2">
+          {guestName && (
+            <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-gold-600/50 bg-[#FAF4E5] px-4 py-1.5 shadow-sm max-w-full">
+              <span className="text-gold-700 text-xs shrink-0">❖</span>
+              <span className="font-serif text-xs sm:text-sm font-bold text-maroon-900 truncate">
+                {lang === "hi" ? `सादर सपरिवार आमंत्रित: ${guestName}` : `Cordially Invited: ${guestName}`}
+              </span>
+              <span className="text-gold-700 text-xs shrink-0">❖</span>
+            </div>
+          )}
 
-          <p className="font-serif italic text-xs sm:text-sm text-neutral-700 max-w-lg mx-auto leading-relaxed">
-            {config.ui.scrollInvitationReq}
-          </p>
+          <div>
+            <span className="inline-block text-[10px] sm:text-xs font-sans font-bold tracking-[0.25em] uppercase text-maroon-800">
+              {config.ui.scrollTogether}
+            </span>
+          </div>
 
           {/* Couple Names */}
           <div className="py-2 sm:py-3">

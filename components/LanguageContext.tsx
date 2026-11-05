@@ -8,12 +8,28 @@ interface LanguageContextType {
   setLang: (lang: "en" | "hi") => void;
   toggleLang: () => void;
   config: WeddingConfig;
+  guestName: string;
+  setGuestName: (name: string) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<"en" | "hi">("en");
+  const [guestName, setGuestName] = useState<string>("");
+
+  // Read guest name from URL query parameter (?to=Name or ?guest=Name or ?name=Name)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const guest = params.get("to") || params.get("guest") || params.get("name");
+        if (guest && guest.trim()) {
+          setGuestName(guest.trim());
+        }
+      } catch {}
+    }
+  }, []);
 
   // Load preferred language from localStorage if available
   useEffect(() => {
@@ -39,7 +55,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const config = getWeddingConfig(lang);
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, toggleLang, config }}>
+    <LanguageContext.Provider
+      value={{ lang, setLang, toggleLang, config, guestName, setGuestName }}
+    >
       {children}
     </LanguageContext.Provider>
   );

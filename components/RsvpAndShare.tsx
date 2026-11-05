@@ -4,38 +4,57 @@ import React, { useState } from "react";
 import { useLanguage } from "./LanguageContext";
 import { OrnateDivider, LotusMotif, CornerOrnament } from "./RoyalMotifs";
 import {
-  IconShare,
   IconBrandWhatsapp,
   IconPhone,
-  IconCheck,
+  IconSend,
 } from "@tabler/icons-react";
 
 export function RsvpAndShare() {
   const { config, lang } = useLanguage();
-  const { rsvp, socialSharing, bride, groom, wedding } = config;
-  const [copiedLink, setCopiedLink] = useState(false);
+  const { rsvp } = config;
 
-  const handleShare = async () => {
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try {
-        await navigator.share({
-          title: socialSharing.title,
-          text: socialSharing.text,
-          url: window.location.href,
-        });
-      } catch (err) {}
-    } else {
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        setCopiedLink(true);
-        setTimeout(() => setCopiedLink(false), 2500);
-      } catch {}
-    }
+  const [guestName, setGuestName] = useState("");
+  const [blessingMessage, setBlessingMessage] = useState("");
+
+  const quickWishes =
+    lang === "hi"
+      ? [
+          "सदा सुखी रहो, अखंड सौभाग्य! 🌸",
+          "हार्दिक बधाई एवं मंगलकामनाएं! 💐",
+          "ईश्वर आप दोनों को सदा खुश रखे! ✨",
+          "सुख, समृद्धि और खुशियों भरा दांपत्य जीवन रहे! 🪔",
+        ]
+      : [
+          "Wishing you endless joy and happiness! 🌸",
+          "Heartiest congratulations to the lovely couple! 💐",
+          "May God shower you with eternal love and harmony! ✨",
+          "A lifetime of togetherness and blessings! 🪔",
+        ];
+
+  const handleQuickWish = (wish: string) => {
+    setBlessingMessage((prev) => (prev ? `${prev} ${wish}` : wish));
   };
 
-  const whatsappUrl = `https://wa.me/${rsvp.whatsappNumber}?text=${encodeURIComponent(
-    rsvp.whatsappPreFilledText
-  )}`;
+  const handleSendViaWhatsapp = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+
+    const formattedMessage = blessingMessage.trim()
+      ? `"${blessingMessage.trim()}"`
+      : lang === "hi"
+      ? '"मनोज एवं हिमानी को पावन विवाह की हार्दिक बधाई एवं मंगलमय शुभकामनाएं!"'
+      : '"Wishing Manoj & Himani a blessed and blissful married life!"';
+
+    const sender = guestName.trim()
+      ? `- ${guestName.trim()}`
+      : lang === "hi"
+      ? "- स्नेही स्वजन / अतिथि"
+      : "- Well-wisher";
+
+    const textToSend = `नमस्ते! मनोज एवं हिमानी के शुभ विवाह हेतु हार्दिक शुभकामना संदेश:\n\n${formattedMessage}\n\n${sender}`;
+
+    const url = `https://wa.me/${rsvp.whatsappNumber}?text=${encodeURIComponent(textToSend)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <section id="rsvp" className="py-12 sm:py-20 relative">
@@ -48,52 +67,85 @@ export function RsvpAndShare() {
             <CornerOrnament position="top-right" />
           </div>
 
+          {/* Section Tag */}
           <span className="text-xs font-sans tracking-[0.25em] uppercase text-maroon-700 font-semibold block">
             {config.ui.rsvpTag}
           </span>
 
-          <h2 className="font-royal text-3xl sm:text-4xl font-bold text-maroon-900 mt-1">
+          {/* Section Title */}
+          <h2 className="font-royal text-2xl sm:text-4xl font-bold text-maroon-900 mt-1">
             {config.ui.rsvpTitle}
           </h2>
 
-          <p className="font-serif italic text-xs sm:text-base text-neutral-600 max-w-md mx-auto mt-2 px-2">
+          <p className="font-serif italic text-xs sm:text-base text-neutral-600 max-w-lg mx-auto mt-2 px-2">
             {config.ui.rsvpSubtitle}
           </p>
 
           <OrnateDivider className="my-5 sm:my-6" />
 
-          {/* Action Buttons: WhatsApp RSVP & Share */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md mx-auto">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-emerald-600 bg-emerald-700 px-7 py-3.5 text-xs sm:text-sm font-sans font-semibold tracking-wider uppercase text-white shadow-md shadow-emerald-950/20 hover:bg-emerald-600 active:scale-95 transition-all"
-            >
-              <IconBrandWhatsapp className="h-4 w-4" />
-              <span>{config.ui.rsvpWhatsappBtn}</span>
-            </a>
+          {/* INTERACTIVE BLESSING FORM SENT DIRECTLY VIA WHATSAPP */}
+          <form onSubmit={handleSendViaWhatsapp} className="max-w-lg mx-auto text-left space-y-4">
+            {/* Guest Name Input */}
+            <div>
+              <label className="block text-xs font-sans font-bold uppercase tracking-wider text-maroon-900 mb-1">
+                {lang === "hi" ? "आपका शुभ नाम" : "Your Name"}
+              </label>
+              <input
+                type="text"
+                value={guestName}
+                onChange={(e) => setGuestName(e.target.value)}
+                placeholder={config.ui.blessingNamePlaceholder}
+                className="w-full rounded-xl border border-gold-500/50 bg-white/90 px-4 py-2.5 text-xs sm:text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-gold-500 shadow-sm"
+              />
+            </div>
 
-            <button
-              type="button"
-              onClick={handleShare}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-gold-500 bg-gradient-to-r from-maroon-700 via-maroon-800 to-maroon-900 px-7 py-3.5 text-xs sm:text-sm font-sans font-semibold tracking-wider uppercase text-ivory-100 shadow-md shadow-maroon-950/20 active:scale-95 transition-all"
-            >
-              {copiedLink ? (
-                <>
-                  <IconCheck className="h-4 w-4 text-emerald-400" />
-                  <span>{config.ui.shareCopiedBtn}</span>
-                </>
-              ) : (
-                <>
-                  <IconShare className="h-4 w-4 text-gold-400" />
-                  <span>{config.ui.shareBtn}</span>
-                </>
-              )}
-            </button>
-          </div>
+            {/* Blessing Message Textarea */}
+            <div>
+              <label className="block text-xs font-sans font-bold uppercase tracking-wider text-maroon-900 mb-1">
+                {lang === "hi" ? "वर-वधु हेतु शुभकामना संदेश" : "Blessing Message"}
+              </label>
+              <textarea
+                rows={3}
+                value={blessingMessage}
+                onChange={(e) => setBlessingMessage(e.target.value)}
+                placeholder={config.ui.blessingMessagePlaceholder}
+                className="w-full rounded-xl border border-gold-500/50 bg-white/90 p-3 text-xs sm:text-sm text-neutral-900 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-gold-500 shadow-sm resize-none"
+              />
+            </div>
 
-          {/* Contact Numbers */}
+            {/* Quick Wish Suggestion Chips */}
+            <div>
+              <span className="text-[10px] sm:text-xs font-sans text-neutral-500 block mb-1.5 font-medium">
+                {lang === "hi" ? "त्वरित शुभकामना चुनें (Click to add):" : "Quick blessing suggestions:"}
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {quickWishes.map((wish, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => handleQuickWish(wish)}
+                    className="text-[11px] rounded-full border border-gold-500/40 bg-white/80 px-2.5 py-1 text-maroon-900 hover:bg-gold-50 hover:border-gold-500 transition-colors"
+                  >
+                    {wish}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Direct WhatsApp Action Button */}
+            <div className="pt-3">
+              <button
+                type="submit"
+                className="w-full inline-flex items-center justify-center gap-2.5 rounded-full border border-emerald-500 bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-800 px-6 py-3.5 text-xs sm:text-sm font-sans font-bold tracking-wider uppercase text-white shadow-lg shadow-emerald-950/25 hover:from-emerald-500 hover:to-emerald-700 hover:scale-[1.01] active:scale-95 transition-all"
+              >
+                <IconBrandWhatsapp className="h-5 w-5 text-white" />
+                <span>{config.ui.rsvpWhatsappBtn}</span>
+                <IconSend className="h-4 w-4 text-emerald-200" />
+              </button>
+            </div>
+          </form>
+
+          {/* Assistance & Inquiries Contact Numbers */}
           <div className="mt-8 pt-6 border-t border-gold-500/20">
             <span className="text-[10px] sm:text-[11px] font-sans font-semibold uppercase tracking-wider text-neutral-500 block mb-3">
               {config.ui.assistanceLabel}
@@ -120,21 +172,20 @@ export function RsvpAndShare() {
             <LotusMotif className="h-7 w-7 sm:h-8 sm:w-8" />
           </div>
 
-          <h3 className="font-royal text-2xl sm:text-3xl font-bold text-maroon-900">
-            {bride.firstName} {lang === "hi" ? "संग" : "&"} {groom.firstName}
-          </h3>
-
-          <p className="font-serif italic text-xs sm:text-sm text-neutral-600 max-w-sm mx-auto px-2">
-            {config.ui.footerThanks}
+          <p className="font-royal text-xl sm:text-2xl font-bold text-maroon-900">
+            {lang === "hi" ? "|| शुभाशीष एवं धन्यवाद ||" : "|| Seeking Blessings & Eternal Gratitude ||"}
           </p>
 
-          <p className="text-xs font-sans text-gold-800 font-semibold tracking-widest uppercase pt-1">
-            {wedding.displayDate} • {config.venue.city}
+          <p className="font-serif italic text-xs sm:text-sm text-neutral-600 max-w-md mx-auto px-4">
+            &ldquo;{config.ui.footerThanks}&rdquo;
           </p>
 
-          <p className="text-[10px] sm:text-[11px] font-sans text-neutral-400 pt-4">
-            {wedding.hashtag} • {config.ui.designedWithLove}
-          </p>
+          <div className="text-[11px] font-sans text-neutral-500 pt-2">
+            <p className="font-semibold text-maroon-900">
+              {config.bride.firstName} & {config.groom.firstName} • {config.wedding.displayDate}
+            </p>
+            <p className="mt-0.5 text-gold-700/80">{config.ui.designedWithLove}</p>
+          </div>
         </div>
       </div>
     </section>

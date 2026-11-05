@@ -18,10 +18,13 @@ export function PalaceCorridorScene({
   const { config, lang } = useLanguage();
 
   return (
-    <section className="relative min-h-[90dvh] flex items-center justify-center overflow-hidden py-12 sm:py-20 px-4 sm:px-6">
-      {/* Background: Grand Royal Palace Courtyard with Subtle Parallax */}
+    <section
+      id="palace-corridor"
+      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 px-3.5 sm:px-6"
+    >
+      {/* Background: Grand Royal Palace Courtyard */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-fixed scale-105"
+        className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/images/palace-courtyard.jpg')",
           filter: "brightness(0.65) contrast(1.1)",

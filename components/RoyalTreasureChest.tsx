@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { useLanguage } from "./LanguageContext";
-import { royalSound } from "@/lib/sound";
 import { RoyalInvitationScroll } from "./RoyalInvitationScroll";
 import { LotusMotif } from "./RoyalMotifs";
 import { IconKey, IconSparkles, IconLock, IconLockOpen, IconRefresh } from "@tabler/icons-react";
@@ -21,13 +20,9 @@ export function RoyalTreasureChest({ onScrollToDetails }: RoyalTreasureChestProp
     if (chestState !== "locked") return;
     setChestState("unlocking");
 
-    // Play metallic lock rotation click
-    royalSound.playLockClick();
-
     // After lock rotation, open the chest and unleash golden divine light
     setTimeout(() => {
       setChestState("opened");
-      royalSound.playGoldenChimes();
 
       // Launch dazzling golden sparkles
       try {
@@ -38,7 +33,7 @@ export function RoyalTreasureChest({ onScrollToDetails }: RoyalTreasureChestProp
           colors: ["#C5A059", "#DFBA6B", "#F59E0B", "#FDF4DC", "#80162A"],
           disableForReducedMotion: true,
         });
-      } catch {}
+      } catch {} 
     }, 900);
   };
 

@@ -58,6 +58,12 @@ export interface WeddingConfig {
     whatsappNumber: string; // Format: country code + number without plus, e.g. 919876543210
     whatsappPreFilledText: string;
   };
+  music: {
+    youtubeVideoId: string;
+    youtubeUrl: string;
+    title: string;
+    autoPlayOnEnter: boolean;
+  };
   socialSharing: {
     title: string;
     text: string;
@@ -121,6 +127,12 @@ export interface WeddingConfig {
     rsvpTitle: string;
     rsvpSubtitle: string;
     rsvpWhatsappBtn: string;
+    submitBlessingBtn: string;
+    sendOnWhatsappBtn: string;
+    blessingNamePlaceholder: string;
+    blessingMessagePlaceholder: string;
+    blessingSubmittedSuccess: string;
+    recentBlessingsTitle: string;
     shareBtn: string;
     shareCopiedBtn: string;
     assistanceLabel: string;
@@ -129,6 +141,10 @@ export interface WeddingConfig {
     backToScroll: string;
     backToMainInvitation: string;
     ceremoniesPageTitle: string;
+    musicPlaying: string;
+    musicPaused: string;
+    musicTooltipPlay: string;
+    musicTooltipPause: string;
   };
 }
 
@@ -157,11 +173,12 @@ export const WEDDING_CONFIG_EN: WeddingConfig = {
     hashtag: "#ManojWedsHimani",
   },
   venue: {
-    name: "Royal Celebration Resort & Lawns",
-    city: "Rajasthan, India",
-    fullAddress: "Near Celebration Circle, Royal Resort Campus, Rajasthan, India",
-    googleMapsUrl: "https://maps.google.com/?q=Rajasthan+Wedding+Resort",
-    landmarkNote: "Detailed entry gate & parking directions will be guided at the venue arrival.",
+    name: "Radha Krishna Marriage Garden",
+    city: "Mansarovar, Jaipur, Rajasthan",
+    fullAddress: "Jaitram Nagar, Near Gyan Vihar Colony, Khejdo Ka Bass, Mansarovar, Jaipur, Rajasthan 302020",
+    googleMapsUrl:
+      "https://www.google.com/maps/dir//Radha+Krishna+Marriage+Garden,+Jaitram+Nagar,+near+Gyan+Vihar+Colony,+Khejdo+ka+Bass,+Mansarovar,+Jaipur,+Rajasthan+302020/@26.9024618,75.7487774,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x396db576f27427b5:0x8f06d7b655221d48!2m2!1d75.7568201!2d26.8383549",
+    landmarkNote: "Near Gyan Vihar Colony, Khejdo Ka Bass, Mansarovar, Jaipur",
   },
   invitation: {
     traditionalShloka: "|| वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥",
@@ -179,23 +196,11 @@ export const WEDDING_CONFIG_EN: WeddingConfig = {
   },
   events: [
     {
-      id: "haldi",
-      title: "Mangal Haldi & Ubtan",
-      subtitle: "Auspicious Turmeric Rituals & Festivities",
-      date: "Saturday, 28th February 2026",
-      time: "10:30 AM onwards",
-      venue: "Home Courtyard / Celebration Lawns",
-      dressCode: "Sunshine Yellow & Festive Traditional",
-      description:
-        "An intimate morning bathed in fragrant turmeric paste, golden marigold blossoms, joyful family laughter, and auspicious mangal geet.",
-      iconType: "haldi",
-    },
-    {
       id: "chakbhat",
       title: "Chak Bhat & Mayra Dastoor",
       subtitle: "Traditional Nanihal Welcome & Maternal Blessings",
-      date: "Saturday, 28th February 2026",
-      time: "03:30 PM onwards",
+      date: "Thursday, 26th February 2026",
+      time: "11:15 AM onwards",
       venue: "Main Celebration Hall",
       dressCode: "Traditional Rajasthani Ethnic Wear",
       description:
@@ -203,28 +208,40 @@ export const WEDDING_CONFIG_EN: WeddingConfig = {
       iconType: "chakbhat",
     },
     {
+      id: "haldi",
+      title: "Mangal Haldi & Mehendi Rasam",
+      subtitle: "Auspicious Turmeric, Bridal Henna & Festivities",
+      date: "Thursday, 26th February 2026",
+      time: "01:45 PM onwards",
+      venue: "Home Courtyard / Celebration Lawns",
+      dressCode: "Sunshine Yellow & Festive Traditional",
+      description:
+        "An intimate afternoon bathed in fragrant turmeric paste, artistic mehendi, joyful family laughter, and auspicious mangal geet.",
+      iconType: "haldi",
+    },
+    {
+      id: "reception",
+      title: "The Grand Reception & Preeti Bhoj",
+      subtitle: "Auspicious Blessings & Celebratory Royal Feast",
+      date: "Thursday, 26th February 2026",
+      time: "07:15 PM onwards",
+      venue: "Radha Krishna Marriage Garden, Mansarovar, Jaipur",
+      dressCode: "Formal Ethnic / Indo-Western Festive",
+      description:
+        "An enchanting evening welcoming guests with delightful royal feasts and heartfelt family blessings.",
+      iconType: "reception",
+    },
+    {
       id: "vivah",
       title: "Shubh Vivah — Sacred Nuptials",
       subtitle: "Baraat Swagat, Varmala & Sacred Pheras",
       date: "Sunday, 1st March 2026",
       time: "05:00 PM Baraat | 07:15 PM Sacred Pheras",
-      venue: "The Grand Mandap, Celebration Resort",
+      venue: "Radha Krishna Marriage Garden, Mansarovar, Jaipur",
       dressCode: "Royal Traditional / Maroons, Golds & Creams",
       description:
         "The grand Baraat procession, the ceremonial exchange of floral garlands (Varmala), and the seven sacred vows around the holy agni.",
       iconType: "vivah",
-    },
-    {
-      id: "reception",
-      title: "The Grand Reception",
-      subtitle: "Auspicious Blessings & Celebratory Feast",
-      date: "Monday, 2nd March 2026",
-      time: "07:00 PM onwards",
-      venue: "Royal Banquet Grounds",
-      dressCode: "Formal Ethnic / Indo-Western Festive",
-      description:
-        "An enchanting evening welcoming the newly wedded couple, Manoj & Himani, with delightful feasts and heartfelt family blessings.",
-      iconType: "reception",
     },
   ],
   rsvp: {
@@ -235,6 +252,12 @@ export const WEDDING_CONFIG_EN: WeddingConfig = {
     whatsappNumber: "919876543210",
     whatsappPreFilledText:
       "Namaste! Delighted to RSVP for the wedding celebration of Manoj & Himani Kumawat.",
+  },
+  music: {
+    youtubeVideoId: "CbMRLTpWDIU",
+    youtubeUrl: "https://youtu.be/CbMRLTpWDIU",
+    title: "Royal Shehnai & Festive Melodies",
+    autoPlayOnEnter: true,
   },
   socialSharing: {
     title: "Wedding Invitation | Manoj & Himani Kumawat",
@@ -295,18 +318,28 @@ export const WEDDING_CONFIG_EN: WeddingConfig = {
     welcomedByTag: "Warmly Welcomed By",
     brideFamilyLabel: "Bride's Family",
     groomFamilyLabel: "Groom's Family",
-    rsvpTag: "Kindly Respond & Celebrate With Us",
-    rsvpTitle: "RSVP & Blessings",
-    rsvpSubtitle: "Please let us know if you will be joining us for the royal wedding celebration of Manoj & Himani.",
-    rsvpWhatsappBtn: "RSVP via WhatsApp",
+    rsvpTag: "Warm Wishes & Congratulations",
+    rsvpTitle: "Send Your Blessings & Wishes",
+    rsvpSubtitle: "Share your heartfelt blessing message and warm wishes for Manoj & Himani Kumawat.",
+    rsvpWhatsappBtn: "Send Blessing via WhatsApp",
+    submitBlessingBtn: "Submit a Blessing Message",
+    sendOnWhatsappBtn: "Send on WhatsApp",
+    blessingNamePlaceholder: "Your Full Name...",
+    blessingMessagePlaceholder: "Write your heartfelt blessing and warm wishes for Manoj & Himani...",
+    blessingSubmittedSuccess: "Thank you for your warm blessings! Your wishes have been received with love.",
+    recentBlessingsTitle: "Heartfelt Wishes from Family & Friends",
     shareBtn: "Share Invitation",
     shareCopiedBtn: "Invitation Link Copied!",
     assistanceLabel: "For Inquiries & Travel Assistance",
     footerThanks: "Thank you for being an indispensable part of our lives, our stories, and our celebrations.",
     designedWithLove: "Designed with love for family & guests",
-    backToScroll: "Back to Invitation Scroll",
-    backToMainInvitation: "Return to Main Royal Invitation",
+    backToScroll: "Back to Scroll",
+    backToMainInvitation: "Back to Invitation",
     ceremoniesPageTitle: "All Auspicious Ceremonies & Details",
+    musicPlaying: "Music: Playing",
+    musicPaused: "Music: Paused",
+    musicTooltipPlay: "Play Wedding Music",
+    musicTooltipPause: "Pause Wedding Music",
   },
 };
 
@@ -335,11 +368,13 @@ export const WEDDING_CONFIG_HI: WeddingConfig = {
     hashtag: "#मनोज_संग_हिमानी",
   },
   venue: {
-    name: "रॉयल सेलिब्रेशन रिसॉर्ट एवं लॉन्स",
-    city: "राजस्थान, भारत",
-    fullAddress: "सेलिब्रेशन सर्किल के पास, रॉयल रिसॉर्ट परिसर, राजस्थान, भारत",
-    googleMapsUrl: "https://maps.google.com/?q=Rajasthan+Wedding+Resort",
-    landmarkNote: "विस्तृत प्रवेश द्वार एवं पार्किंग सहायता रिसॉर्ट आगमन पर उपलब्ध रहेगी।",
+    name: "राधा कृष्णा मैरिज गार्डन",
+    city: "मानसरोवर, जयपुर, राजस्थान",
+    fullAddress:
+      "जैतराम नगर, ज्ञान विहार कॉलोनी के पास, खेजड़ों का बास, मानसरोवर, जयपुर, राजस्थान 302020",
+    googleMapsUrl:
+      "https://www.google.com/maps/dir//Radha+Krishna+Marriage+Garden,+Jaitram+Nagar,+near+Gyan+Vihar+Colony,+Khejdo+ka+Bass,+Mansarovar,+Jaipur,+Rajasthan+302020/@26.9024618,75.7487774,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x396db576f27427b5:0x8f06d7b655221d48!2m2!1d75.7568201!2d26.8383549",
+    landmarkNote: "ज्ञान विहार कॉलोनी के पास, खेजड़ों का बास, मानसरोवर, जयपुर",
   },
   invitation: {
     traditionalShloka: "|| वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥",
@@ -357,23 +392,11 @@ export const WEDDING_CONFIG_HI: WeddingConfig = {
   },
   events: [
     {
-      id: "haldi",
-      title: "मंगल हल्दी एवं उबटन",
-      subtitle: "पीली हल्दी, मंगल गीत एवं खुशियों का उबटन",
-      date: "शनिवार, 28 फरवरी 2026",
-      time: "प्रातः 10:30 बजे से",
-      venue: "गृह प्रांगण / सेलिब्रेशन लॉन्स",
-      dressCode: "पीला पारंपरिक परिधान (येलो एथनिक)",
-      description:
-        "सुगंधित हल्दी का लेप, गेंदे के पुष्पों की वर्षा, मंगल लोकगीत एवं हंसी-ठिठोली से भरा शुभ हल्दी उत्सव।",
-      iconType: "haldi",
-    },
-    {
       id: "chakbhat",
       title: "चक भात एवं मायरा दस्तूर",
       subtitle: "ननिहाल पक्ष का स्वागत, मायरा एवं मातृत्व आशीर्वाद",
-      date: "शनिवार, 28 फरवरी 2026",
-      time: "दोपहर 03:30 बजे से",
+      date: "गुरुवार, 26 फरवरी 2026",
+      time: "प्रातः 11:15 बजे से",
       venue: "मुख्य सेलिब्रेशन हॉल",
       dressCode: "पारंपरिक राजस्थानी परिधान",
       description:
@@ -381,28 +404,40 @@ export const WEDDING_CONFIG_HI: WeddingConfig = {
       iconType: "chakbhat",
     },
     {
+      id: "haldi",
+      title: "मंगल हल्दी एवं मेहंदी रस्म",
+      subtitle: "पीली हल्दी, मेहंदी उत्सव एवं मंगल गीत",
+      date: "गुरुवार, 26 फरवरी 2026",
+      time: "दोपहर 01:45 बजे से",
+      venue: "गृह प्रांगण / सेलिब्रेशन लॉन्स",
+      dressCode: "पीला पारंपरिक परिधान (येलो एथनिक)",
+      description:
+        "सुगंधित हल्दी का लेप, हाथों में सजी सुंदर मेहंदी, गेंदे के पुष्पों की वर्षा एवं मंगल लोकगीतों से भरा उल्लासपूर्ण उत्सव।",
+      iconType: "haldi",
+    },
+    {
+      id: "reception",
+      title: "शाही प्रीतिभोज (ग्रैंड रिसेप्शन)",
+      subtitle: "पारिवारिक मिलन, स्नेहिल आशीर्वाद एवं सुरुचिपूर्ण शाही भोज",
+      date: "गुरुवार, 26 फरवरी 2026",
+      time: "सायं 07:15 बजे से",
+      venue: "राधा कृष्णा मैरिज गार्डन, मानसरोवर, जयपुर",
+      dressCode: "सभ्य पारंपरिक एवं इंडो-वेस्टर्न परिधान",
+      description:
+        "स्नेही स्वजनों एवं इष्ट-मित्रों संग सुरुचिपूर्ण शाही भोज एवं नव-उमंगों का आनंदमय उत्सव।",
+      iconType: "reception",
+    },
+    {
       id: "vivah",
       title: "शुभ विवाह (पाणिग्रहण संस्कार)",
       subtitle: "बारात अगवानी, वरमाला एवं सात पावन फेरे",
       date: "रविवार, 1 मार्च 2026",
       time: "सायं 05:00 बजे बारात | सायं 07:15 बजे पाणिग्रहण",
-      venue: "शाही मंडप, सेलिब्रेशन रिसॉर्ट",
+      venue: "राधा कृष्णा मैरिज गार्डन, मानसरोवर, जयपुर",
       dressCode: "शाही राजस्थानी परिधान / साफा एवं चुनरी",
       description:
         "शाही बारात का गाजे-बाजे संग स्वागत, सुगंधित वरमाला का आदान-प्रदान एवं अग्नि की साक्षी में सात वचनों के साथ पाणिग्रहण संस्कार।",
       iconType: "vivah",
-    },
-    {
-      id: "reception",
-      title: "प्रीतिभोज (ग्रैंड रिसेप्शन)",
-      subtitle: "वर-वधु आशीर्वाद समारोह एवं शाही भोज",
-      date: "सोमवार, 2 मार्च 2026",
-      time: "सायं 07:00 बजे से प्रभु इच्छा तक",
-      venue: "रॉयल बैंक्वेट ग्राउंड्स",
-      dressCode: "सभ्य पारंपरिक एवं इंडो-वेस्टर्न परिधान",
-      description:
-        "नव-दंपति मनोज एवं हिमानी के दांपत्य जीवन के मंगलमयी आगमन पर स्नेहिल आशीर्वाद एवं सुरुचिपूर्ण शाही भोज का आयोजन।",
-      iconType: "reception",
     },
   ],
   rsvp: {
@@ -413,6 +448,12 @@ export const WEDDING_CONFIG_HI: WeddingConfig = {
     whatsappNumber: "919876543210",
     whatsappPreFilledText:
       "नमस्ते! मनोज एवं हिमानी कुमावत के शुभ विवाह में सम्मिलित होने हेतु सादर सहमति।",
+  },
+  music: {
+    youtubeVideoId: "CbMRLTpWDIU",
+    youtubeUrl: "https://youtu.be/CbMRLTpWDIU",
+    title: "मांगलिक विवाह शहनाई एवं शाही संगीत",
+    autoPlayOnEnter: true,
   },
   socialSharing: {
     title: "शुभ विवाह निमंत्रण पत्र | मनोज एवं हिमानी कुमावत",
@@ -473,18 +514,28 @@ export const WEDDING_CONFIG_HI: WeddingConfig = {
     welcomedByTag: "दर्शनाभिलाषी एवं विनीत",
     brideFamilyLabel: "वधु पक्ष",
     groomFamilyLabel: "वर पक्ष",
-    rsvpTag: "कृपया अपनी उपस्थिति से अनुगृहीत करें",
-    rsvpTitle: "उपस्थिति सूचना (RSVP)",
-    rsvpSubtitle: "कृपया हमें सूचित करें ताकि आपके स्वागत एवं सत्कार की समुचित व्यवस्था की जा सके।",
-    rsvpWhatsappBtn: "व्हाट्सएप पर RSVP भेजें",
+    rsvpTag: "स्नेहिल शुभाशीष एवं मंगलकामनाएं",
+    rsvpTitle: "वर-वधु हेतु शुभकामना संदेश",
+    rsvpSubtitle: "मनोज एवं हिमानी के पावन दांपत्य जीवन के शुभारंभ पर अपना स्नेहिल आशीर्वाद एवं मंगल संदेश प्रेषित करें।",
+    rsvpWhatsappBtn: "व्हाट्सएप पर शुभकामना भेजें",
+    submitBlessingBtn: "शुभकामना संदेश सबमिट करें",
+    sendOnWhatsappBtn: "व्हाट्सएप पर प्रेषित करें",
+    blessingNamePlaceholder: "आपका शुभ नाम...",
+    blessingMessagePlaceholder: "वर-वधु मनोज एवं हिमानी हेतु अपना मंगल संदेश एवं आशीर्वाद लिखें...",
+    blessingSubmittedSuccess: "आपके स्नेहिल आशीर्वाद हेतु बहुत-बहुत धन्यवाद! आपका संदेश सप्रेम स्वीकार हुआ।",
+    recentBlessingsTitle: "प्रियजनों द्वारा प्रेषित पावन शुभाशीष",
     shareBtn: "निमंत्रण पत्र शेयर करें",
     shareCopiedBtn: "निमंत्रण लिंक कॉपी हो गया!",
     assistanceLabel: "यात्रा एवं आवास सहायता संपर्क",
     footerThanks: "हमारे जीवन, हमारी खुशियों एवं इस पावन उत्सव का अभिन्न हिस्सा बनने हेतु आपका हार्दिक आभार।",
     designedWithLove: "समस्त परिवार एवं प्रियजनों हेतु सप्रेम समर्पित",
-    backToScroll: "वापस लग्न पत्रिका पर जाएं",
-    backToMainInvitation: "मुख्य शाही निमंत्रण पर वापस जाएं",
+    backToScroll: "वापस पत्रिका",
+    backToMainInvitation: "वापस लग्न पत्रिका",
     ceremoniesPageTitle: "समस्त मांगलिक कार्यक्रम एवं संपूर्ण विवरण",
+    musicPlaying: "संगीत: चालू",
+    musicPaused: "संगीत: बंद",
+    musicTooltipPlay: "मांगलिक संगीत चालू करें",
+    musicTooltipPause: "संगीत बंद करें",
   },
 };
 

@@ -15,14 +15,37 @@ import { VenueSection } from "./VenueSection";
 import { FamilyBlessings } from "./FamilyBlessings";
 import { RsvpAndShare } from "./RsvpAndShare";
 import { LotusMotif } from "./RoyalMotifs";
-import { royalSound } from "@/lib/sound";
+import { GuestLinkGeneratorModal } from "./GuestLinkGeneratorModal";
 import { IconArrowLeft } from "@tabler/icons-react";
 
-function ExperienceContent() {
-  const { config } = useLanguage();
+interface CinematicWeddingExperienceProps {
+  isCreatorMode?: boolean;
+}
+
+function ExperienceContent({ initialCreatorMode = false }: { initialCreatorMode?: boolean }) {
+  const { config, lang } = useLanguage();
   const [hasEnteredPalace, setHasEnteredPalace] = useState(false);
   const [hasUnlockedVault, setHasUnlockedVault] = useState(false);
   const [activeView, setActiveView] = useState<"invitation" | "ceremonies">("invitation");
+  const [showLinkGenerator, setShowLinkGenerator] = useState(false);
+  const [isCreator, setIsCreator] = useState(initialCreatorMode);
+
+  // Check if current URL slug/route contains /nikhil786
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (
+        initialCreatorMode ||
+        path.includes("nikhil786") ||
+        search.includes("nikhil786") ||
+        hash.includes("nikhil786")
+      ) {
+        setIsCreator(true);
+      }
+    }
+  }, [initialCreatorMode]);
 
   // Sync browser history state for mobile gestures and browser back button
   useEffect(() => {
@@ -37,18 +60,44 @@ function ExperienceContent() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
+  // Lock body scroll while doors are closed so background is never prematurely scrolled
+  useEffect(() => {
+    if (!hasEnteredPalace) {
+      document.body.style.overflow = "hidden";
+      if (typeof window !== "undefined") {
+        window.scrollTo(0, 0);
+      }
+    } else {
+      document.body.style.overflow = "";
+      if (typeof window !== "undefined") {
+        window.scrollTo(0, 0);
+      }
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [hasEnteredPalace]);
+
   const handleEnterPalace = () => {
     setHasEnteredPalace(true);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      }, 50);
+    }
   };
 
   const handleInstantSkip = () => {
     setHasEnteredPalace(true);
     setHasUnlockedVault(true);
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
   };
 
   // Button 1: User explicitly clicks "शाही तिजोरी की ओर बढ़ें"
   const handleProceedToVault = () => {
-    royalSound.playTempleGong();
     if (!hasUnlockedVault) {
       setHasUnlockedVault(true);
     }
@@ -62,7 +111,6 @@ function ExperienceContent() {
 
   // Button 2: User clicks "समस्त मांगलिक कार्यक्रम देखें" from invitation scroll
   const handleOpenCeremonies = () => {
-    royalSound.playGoldenChimes();
     setActiveView("ceremonies");
     try {
       window.history.pushState({ view: "ceremonies" }, "", "#ceremonies");
@@ -72,7 +120,6 @@ function ExperienceContent() {
 
   // Button 3: User clicks "वापस लग्न पत्रिका पर जाएं" to return back
   const handleBackToInvitation = () => {
-    royalSound.playTempleGong();
     setActiveView("invitation");
     if (typeof window !== "undefined" && window.location.hash === "#ceremonies") {
       try {
@@ -103,13 +150,13 @@ function ExperienceContent() {
       {activeView === "ceremonies" ? (
         <div className="relative z-30 min-h-screen bg-ivory-100 text-[#2B181B] transition-opacity duration-500">
           {/* Sticky Royal Navigation Bar */}
-          <header className="sticky top-0 z-40 bg-[#1D040A]/95 border-b border-gold-500/40 backdrop-blur-md px-3 sm:px-6 py-2.5 shadow-xl flex items-center justify-between">
+          <header className="sticky top-0 z-40 bg-[#1D040A]/95 border-b border-gold-500/40 backdrop-blur-md px-3 sm:px-6 py-2 shadow-xl flex items-center justify-between">
             <button
               type="button"
               onClick={handleBackToInvitation}
-              className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-gold-400 bg-gradient-to-r from-maroon-700 via-maroon-800 to-maroon-900 px-3.5 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-sans font-bold tracking-wider uppercase text-ivory-100 shadow-md shadow-black/50 hover:scale-105 active:scale-95 transition-all"
+              className="inline-flex items-center gap-1.5 rounded-full border border-gold-400/90 bg-gradient-to-r from-maroon-700 via-maroon-800 to-maroon-900 px-3 sm:px-4 py-1.5 text-xs font-sans font-semibold tracking-wider uppercase text-ivory-100 shadow-md shadow-black/50 hover:scale-105 active:scale-95 transition-all max-w-fit shrink-0"
             >
-              <IconArrowLeft className="h-4 w-4 text-gold-300 shrink-0" />
+              <IconArrowLeft className="h-3.5 w-3.5 text-gold-300 shrink-0" />
               <span>{config.ui.backToScroll}</span>
             </button>
 
@@ -119,7 +166,7 @@ function ExperienceContent() {
             </div>
 
             {/* Space buffer so right side doesn't overlap LanguageToggle */}
-            <div className="w-28 sm:w-36 pointer-events-none" aria-hidden="true" />
+            <div className="w-24 sm:w-32 pointer-events-none" aria-hidden="true" />
           </header>
 
           <main className="pt-4 sm:pt-8 px-3 sm:px-6 max-w-5xl mx-auto">
@@ -141,14 +188,14 @@ function ExperienceContent() {
             {/* WhatsApp RSVP & Web Share */}
             <RsvpAndShare />
 
-            {/* Prominent Bottom Return Button */}
-            <div className="py-10 sm:py-14 text-center border-t border-gold-500/30 my-8">
+            {/* Compact Bottom Return Button */}
+            <div className="py-8 sm:py-10 text-center border-t border-gold-500/20 my-6">
               <button
                 type="button"
                 onClick={handleBackToInvitation}
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-gold-400 bg-gradient-to-r from-maroon-800 via-maroon-900 to-[#2A050B] px-7 sm:px-10 py-3.5 sm:py-4 text-xs sm:text-sm font-sans font-bold tracking-[0.15em] uppercase text-ivory-100 shadow-2xl shadow-maroon-950/40 hover:scale-105 active:scale-95 transition-all"
+                className="group inline-flex items-center justify-center gap-2 rounded-full border border-gold-400/90 bg-gradient-to-r from-maroon-800 via-maroon-900 to-[#2A050B] px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-sans font-bold tracking-wider uppercase text-ivory-100 shadow-xl shadow-maroon-950/40 hover:scale-105 active:scale-95 transition-all max-w-fit mx-auto"
               >
-                <IconArrowLeft className="h-5 w-5 text-gold-400 group-hover:-translate-x-1 transition-transform" />
+                <IconArrowLeft className="h-4 w-4 text-gold-400 group-hover:-translate-x-1 transition-transform" />
                 <span>{config.ui.backToMainInvitation}</span>
               </button>
             </div>
@@ -181,14 +228,45 @@ function ExperienceContent() {
           </main>
         </>
       )}
+
+      {/* FLOATING BOTTOM-LEFT GUEST LINK GENERATOR BUTTON (Visible ONLY when URL has /nikhil786) */}
+      {isCreator && (
+        <>
+          <aside
+            aria-label="Create Guest Link"
+            className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-50 flex items-center"
+          >
+            <button
+              type="button"
+              onClick={() => setShowLinkGenerator(true)}
+              className="group relative flex items-center gap-2 rounded-full border border-gold-400/80 bg-gradient-to-r from-[#2A050E]/95 via-[#1D0308]/95 to-[#2A050E]/95 px-3.5 sm:px-4 py-2 sm:py-2.5 text-xs font-serif tracking-wider uppercase text-gold-200 shadow-2xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-gold-300 hover:text-gold-100 active:scale-95 ring-1 ring-gold-400/30"
+              title={lang === "hi" ? "गेस्ट लिंक बनाएं" : "Create Guest Link"}
+              aria-label={lang === "hi" ? "गेस्ट लिंक बनाएं" : "Create Guest Link"}
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold-500/20 text-gold-300 group-hover:scale-110 transition-transform">
+                ✨
+              </span>
+              <span className="font-sans text-[11px] sm:text-xs font-bold tracking-wide text-gold-200">
+                {lang === "hi" ? "गेस्ट लिंक बनाएं" : "Create Guest Link"}
+              </span>
+            </button>
+          </aside>
+
+          {/* GUEST LINK GENERATOR POPUP MODAL */}
+          <GuestLinkGeneratorModal
+            isOpen={showLinkGenerator}
+            onClose={() => setShowLinkGenerator(false)}
+          />
+        </>
+      )}
     </div>
   );
 }
 
-export function CinematicWeddingExperience() {
+export function CinematicWeddingExperience({ isCreatorMode = false }: CinematicWeddingExperienceProps) {
   return (
     <LanguageProvider>
-      <ExperienceContent />
+      <ExperienceContent initialCreatorMode={isCreatorMode} />
     </LanguageProvider>
   );
 }

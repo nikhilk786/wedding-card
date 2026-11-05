@@ -78,6 +78,20 @@ export function VenueSection() {
               </div>
             )}
 
+            {/* Interactive Google Maps Embed Preview */}
+            <div className="w-full mt-4 rounded-2xl overflow-hidden border-2 border-gold-500/30 shadow-md bg-stone-100">
+              <iframe
+                title="Google Maps Location - Radha Krishna Marriage Garden"
+                src="https://maps.google.com/maps?q=Radha+Krishna+Marriage+Garden+Mansarovar+Jaipur+302020&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="240"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-48 sm:h-60"
+              />
+            </div>
+
             {/* Action Buttons: Get Directions & Copy Address */}
             <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-md mx-auto">
               <a
